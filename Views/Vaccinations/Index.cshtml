@@ -1,0 +1,57 @@
+﻿@model IEnumerable<VaccineAPI2.Models.Vaccination>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstDose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SecondDose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vaccine.VaccineName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstDose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecondDose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Percentage)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.VaccinationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.VaccinationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VaccinationID })
+        </td>
+    </tr>
+}
+
+</table>

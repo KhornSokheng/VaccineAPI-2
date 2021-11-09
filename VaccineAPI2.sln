@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaccineAPI2", "VaccineAPI2.csproj", "{43BD120C-2B56-422E-B9CB-D85ADD27BE6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43BD120C-2B56-422E-B9CB-D85ADD27BE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43BD120C-2B56-422E-B9CB-D85ADD27BE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43BD120C-2B56-422E-B9CB-D85ADD27BE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43BD120C-2B56-422E-B9CB-D85ADD27BE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED13CE02-DC5B-474D-8DAE-26E6DCDAA4B4}
+	EndGlobalSection
+EndGlobal

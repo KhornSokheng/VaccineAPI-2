@@ -1,0 +1,42 @@
+﻿@model VaccineAPI2.Models.Country
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Country</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Continent.ContinentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Continent.ContinentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Population)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Population)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CountryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,58 @@
+﻿@model VaccineAPI2.Models.Vaccination
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vaccination</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vaccine.VaccineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstDose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstDose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondDose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondDose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Percentage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VaccinationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
