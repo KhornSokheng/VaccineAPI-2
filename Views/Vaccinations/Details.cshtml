@@ -1,4 +1,4 @@
-﻿@model VaccineAPI2.Models.Vaccination
+﻿@model IEnumerable<VaccineAPI2.Models.Vaccination>
 
 @{
     ViewBag.Title = "Details";
@@ -6,53 +6,103 @@
 
 <h2>Details</h2>
 
+        @foreach (var item in Model)
+        {
 <div>
     <h4>Vaccination</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.CountryName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Country.CountryName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country.CountryName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Country.CountryName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Vaccine.VaccineName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Vaccine.VaccineName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstDose)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstDose)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstDose)
-        </dd>
+            <dd>
+                @Convert.ToDecimal(item.SecondDose).ToString("#,##0")
+               
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SecondDose)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.SecondDose)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SecondDose)
-        </dd>
+            <dd>
+                @Convert.ToDecimal(item.SecondDose).ToString("#,##0")
+                
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Percentage)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Percentage)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Percentage)
-        </dd>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Percentage)
+            </dd>
 
-    </dl>
+        </dl>
+        
+    @*
+            <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Country.CountryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Country.CountryName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vaccine.VaccineName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstDose)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstDose)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SecondDose)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SecondDose)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Percentage)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Percentage)
+            </dd>
+
+        </dl>
+    *@
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VaccinationID }) |
+    @Html.ActionLink("Edit", "Edit", new { id =  item.VaccinationID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+        }

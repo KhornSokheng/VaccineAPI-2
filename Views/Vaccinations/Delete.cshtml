@@ -12,19 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Country.CountryName)
+            @Html.DisplayNameFor(model => model.CountryID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Country.CountryName)
+            @Html.DisplayFor(model => model.CountryID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
+            @Html.DisplayNameFor(model => model.VaccineID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Vaccine.VaccineName)
+            @Html.DisplayFor(model => model.VaccineID)
         </dd>
 
         <dt>
@@ -57,8 +57,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index") |
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
         </div>
     }
 </div>

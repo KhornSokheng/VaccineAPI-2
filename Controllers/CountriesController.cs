@@ -16,10 +16,36 @@ namespace VaccineAPI2.Controllers
         private VaccineAPI2Context db = new VaccineAPI2Context();
 
         // GET: Countries
-        public ActionResult Index()
+        public ActionResult Index(string continentName, string countryName)
         {
-            var countries = db.Countries.Include(c => c.Continent);
-            return View(countries.ToList());
+            //var countries = db.Countries.Include(c => c.Continent);
+            //return View(countries.ToList());
+
+            var ContinentList = new List<string>();
+            var ContinentQry = from d in db.Continents
+                               orderby d.ContinentName
+                               select d.ContinentName;
+            ContinentList.AddRange(ContinentQry.Distinct());
+            ViewBag.continentName = new SelectList(ContinentList);
+
+            var continentId = from d in db.Continents
+                              where d.ContinentName == continentName
+                            select d.ContinentID;
+
+
+            var countries = from m in db.Countries.Include(v => v.Continent)
+                              select m;
+            if (!String.IsNullOrEmpty(countryName))
+            {
+                countries = countries.Where(s => s.CountryName.Contains(countryName));
+            }
+            if (!string.IsNullOrEmpty(continentName))
+            {
+                // vaccination = vaccination.Where(x => x.VaccineID == vaccineId);
+                countries = countries.Where(x => x.Continent.ContinentName.Contains(continentName));
+            }
+
+            return View(countries);
         }
 
         // GET: Countries/Details/5

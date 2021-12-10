@@ -1,14 +1,29 @@
 ﻿@model IEnumerable<VaccineAPI2.Models.Vaccination>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vaccinations";
 }
 
-<h2>Index</h2>
+@{ var totalFirst = 0;
+    var totalSecond = 0;
+    var totalPop = 0;
+    //decimal totalPercent = 0;
+    }
+<h2>Vaccination List</h2>
 
 <p>
+    <i class="bi bi-plus-circle" style="font-size: 2rem; color: blue;"></i>
     @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm())
+    {
+<p>
+    Vaccine: @Html.DropDownList("vaccineName", "All")
+
+    Country: @Html.TextBox("countryName") <br /><br />
+    <button type="submit" class="btn btn-primary">Filter</button>
 </p>
+}
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -18,40 +33,62 @@
             @Html.DisplayNameFor(model => model.Vaccine.VaccineName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstDose)
+            @Html.DisplayNameFor(model => model.FirstDose) <i class="bi bi-eyedropper" style="font-size: 2rem; color: blue;"></i>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SecondDose)
+            @Html.DisplayNameFor(model => model.SecondDose) <i class="bi bi-eyedropper" style="font-size: 2rem; color: blue;"></i> <i class="bi bi-eyedropper" style="font-size: 2rem; color: blue; "></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.Population)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Percentage)
         </th>
-        <th></th>
+        <th>
+            <i class="bi bi-pencil-square" style="font-size: 2rem; color: cornflowerblue;"></i> |
+            <i class="bi bi-zoom-in" style="font-size: 2rem; color: yellowgreen;"></i> |
+            <i class="bi bi-trash" style="font-size: 2rem; color: orangered;"></i>
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.CountryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vaccine.VaccineName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstDose)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondDose)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Percentage)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VaccinationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VaccinationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VaccinationID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        totalFirst += item.FirstDose;
+        totalSecond += item.SecondDose;
+        totalPop += item.Country.Population;
+        //totalPercent += Convert.ToDecimal(item.Percentage) / (2 * totalPop);
+        //totalPercent = totalPercent + (item.Percentage * item.Country.Population) / item.Country.Population;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaccine.VaccineName)
+            </td>
+            <td>
+                @Convert.ToDecimal(item.FirstDose).ToString("#,##0")
+
+            </td>
+            <td>
+                @Convert.ToDecimal(item.SecondDose).ToString("#,##0")
+            </td>
+            <td>
+                @Convert.ToDecimal(item.Country.Population).ToString("#,##0")
+            </td>
+            <td>
+                @Convert.ToDecimal(Convert.ToDecimal(item.FirstDose + item.SecondDose) / (2 * item.Country.Population)).ToString("#,##0.0000")
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.VaccinationID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.VaccinationID}) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.VaccinationID })
+
+            </td>
+        </tr>
+    }
+    <h4 class="text-info">Total First Dose: @Convert.ToDecimal(totalFirst).ToString("#,##0")</h4>
+    <h4 class="text-primary">Total Second Dose: @Convert.ToDecimal(totalSecond).ToString("#,##0")</h4>
+    @*<p>Percentage: @Convert.ToDecimal(totalPercent).ToString("#,##0.0000")</p>*@
 
 </table>

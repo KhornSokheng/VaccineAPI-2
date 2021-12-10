@@ -16,10 +16,36 @@ namespace VaccineAPI2.Controllers
         private VaccineAPI2Context db = new VaccineAPI2Context();
 
         // GET: Vaccinations
-        public ActionResult Index()
+        public ActionResult Index(string vaccineName,string countryName)
         {
-            var vaccinations = db.Vaccinations.Include(v => v.Country).Include(v => v.Vaccine);
-            return View(vaccinations.ToList());
+            //var vaccinations = db.Vaccinations.Include(v => v.Country).Include(v => v.Vaccine);
+            //return View(vaccinations.ToList());
+
+            var VaccineList = new List<string>();
+            var VaccineQry = from d in db.Vaccines
+                           orderby d.VaccineName
+                           select d.VaccineName;
+            VaccineList.AddRange(VaccineQry.Distinct());
+            ViewBag.vaccineName = new SelectList(VaccineList);
+
+            var vaccineId = from d in db.Vaccines
+                            where d.VaccineName == vaccineName
+                            select d.VaccineID;
+            
+
+            var vaccination = from m in db.Vaccinations.Include(v => v.Country).Include(v => v.Vaccine)
+                              select m;
+            if (!String.IsNullOrEmpty(countryName))
+            {
+                vaccination = vaccination.Where(s => s.Country.CountryName.Contains(countryName));
+            }
+            if (!string.IsNullOrEmpty(vaccineName))
+            {
+               // vaccination = vaccination.Where(x => x.VaccineID == vaccineId);
+                vaccination = vaccination.Where(x => x.Vaccine.VaccineName.Contains(vaccineName));
+            }
+            
+            return View(vaccination);
         }
 
         // GET: Vaccinations/Details/5
@@ -29,7 +55,10 @@ namespace VaccineAPI2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vaccination vaccination = db.Vaccinations.Find(id);
+            var vaccination = from m in  db.Vaccinations.Include(v => v.Country).Include(v => v.Vaccine).Where(x => x.VaccinationID == id)
+                              select m;
+
+            //Vaccination vaccination = db.Vaccinations.Find(id);
             if (vaccination == null)
             {
                 return HttpNotFound();

@@ -1,45 +1,57 @@
 ﻿@model IEnumerable<VaccineAPI2.Models.Country>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Countries";
 }
 
-<h2>Index</h2>
+<h2>All Countries</h2>
 
 <p>
+    <i class="bi bi-plus-circle" style="font-size: 2rem; color: blue;"></i>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Continent.ContinentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Population)
-        </th>
-        <th></th>
-    </tr>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Continent: @Html.DropDownList("continentName", "All")
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Continent.ContinentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CountryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Population)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CountryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CountryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CountryID })
-        </td>
-    </tr>
+        Country: @Html.TextBox("countryName") <br /><br />
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </p>
 }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Continent.ContinentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Population)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Continent.ContinentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryName)
+                </td>
+                <td>
+                    @Convert.ToDecimal(item.Population).ToString("#,##0")
+
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CountryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CountryID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CountryID })
+                </td>
+            </tr>
+        }
+
+    </table>
